@@ -38,7 +38,6 @@ def save_minute(item):
     minute, _ = CityCouncilMinute.objects.get_or_create(
         date=item["date"],
         file_url=item["file_urls"][0],
-        file_content=item["file_content"],
         crawled_from=item["crawled_from"],
         defaults={
             "title": item["title"],

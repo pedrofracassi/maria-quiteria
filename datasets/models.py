@@ -47,6 +47,7 @@ class CityCouncilMinute(DatasetMixin):
     event_type = models.CharField(max_length=20, choices=CITY_COUNCIL_EVENT_TYPE)
     file_url = models.URLField(null=True, blank=True)
     file_content = models.TextField(null=True, blank=True)
+    checksum = models.CharField(max_length=128, null=True, blank=True)
 
     class Meta:
         verbose_name = "Câmara de Vereadores - Atas"
