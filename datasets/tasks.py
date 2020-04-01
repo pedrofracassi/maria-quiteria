@@ -3,7 +3,7 @@ from pathlib import Path
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from dramatiq import actor
+from dramatiq import actor, set_broker
 from dramatiq.brokers.rabbitmq import RabbitmqBroker
 from tika import parser
 
@@ -20,7 +20,9 @@ except ImproperlyConfigured:
     from datasets.models import Gazette
 
 
-RabbitmqBroker(url=settings.CLOUDAMQP_URL)
+rabbitmq_broker = RabbitmqBroker(url=settings.CLOUDAMQP_URL)
+set_broker(rabbitmq_broker)
+print(f">>>>>>>>>>>>>> {settings.CLOUDAMQP_URL}")
 ITEM_TO_MODEL = {"GazetteItem": Gazette, "LegacyGazetteItem": Gazette}
 
 
