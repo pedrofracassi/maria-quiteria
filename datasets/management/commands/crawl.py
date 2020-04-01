@@ -1,6 +1,5 @@
 import os
 
-
 from datasets.models import (
     CityCouncilAgenda,
     CityCouncilAttendanceList,
@@ -80,14 +79,13 @@ class Command(BaseCommand):
             MinuteSpider, start_from_date=CityCouncilMinute.last_collected_item_date()
         )
 
-        if os.getenv("FEATURE_FLAG__SAVE_GAZETTE", False):
-            last_collected_gazette = Gazette.last_collected_item_date()
-            if last_collected_gazette is None:
-                process.crawl(LegacyGazetteSpider)
-            process.crawl(
-                ExecutiveAndLegislativeGazetteSpider,
-                start_from_date=last_collected_gazette,
-            )
+        last_collected_gazette = Gazette.last_collected_item_date()
+        if last_collected_gazette is None:
+            process.crawl(LegacyGazetteSpider)
+        process.crawl(
+            ExecutiveAndLegislativeGazetteSpider,
+            start_from_date=last_collected_gazette,
+        )
 
         process.start()
         self.success("Done!")

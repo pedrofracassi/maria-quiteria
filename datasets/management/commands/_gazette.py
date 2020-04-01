@@ -16,7 +16,6 @@ def save_gazette(item):
             "crawled_at": make_aware(item["crawled_at"]),
             "crawled_from": item["crawled_from"],
             "file_url": item["file_urls"][0],
-            "file_content": item.get("file_content"),
         },
     )
     for event in item["events"]:
@@ -53,11 +52,7 @@ def save_legacy_gazette(item):
         crawled_from=item["crawled_from"],
         file_url=item["file_urls"][0],
         is_legacy=True,
-        defaults={
-            "crawled_at": make_aware(item["crawled_at"]),
-            "file_content": item.get("file_content"),
-            "notes": notes,
-        },
+        defaults={"crawled_at": make_aware(item["crawled_at"]), "notes": notes},
     )
     GazetteEvent.objects.create(
         gazette=gazette,
