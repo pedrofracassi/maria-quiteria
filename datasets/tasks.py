@@ -22,7 +22,6 @@ except ImproperlyConfigured:
 
 rabbitmq_broker = RabbitmqBroker(url=settings.CLOUDAMQP_URL)
 set_broker(rabbitmq_broker)
-print(f">>>>>>>>>>>>>> {settings.CLOUDAMQP_URL}")
 ITEM_TO_MODEL = {"GazetteItem": Gazette, "LegacyGazetteItem": Gazette}
 
 
